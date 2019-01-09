@@ -12,7 +12,7 @@ public class Physics {
 	
 	public boolean CirclevsCircle(Circle a, Circle b)
 	{
-		float r = a.radius + b.radius;
+		float r = a.r + b.r;
 		float dx = (a.pos.x + b.pos.x) * (a.pos.x + b.pos.x);
 		float dy = (a.pos.y + b.pos.y) * (a.pos.y + b.pos.y);
 		r *= r;

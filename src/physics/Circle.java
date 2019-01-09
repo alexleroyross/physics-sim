@@ -1,26 +1,34 @@
 package physics;
 
 public class Circle {
-	public float radius;
+	
+	// radius
+	public float r;
+	
+	// position vector
 	public Vec2 pos;
 	
 	public Circle()
 	{
-		radius = 0;
-		pos.x = 0;
-		pos.y = 0;
+		r = 0;
+		pos = new Vec2();
 	}
 	
 	public Circle(int x, int y, int r)
 	{
-		this.radius = r;
-		this.pos.x = x;
-		this.pos.y = y;
+		this.r = r;
+		pos = new Vec2(x, y);
 	}
 	
 	public Circle(Vec2 v, int r)
 	{
-		this.radius = r;
-		this.pos.set(v);
+		this.r = r;
+		this.pos = new Vec2(v);
+	}
+	
+	public void set(Circle c)
+	{
+		this.pos.set(c.pos);
+		this.r = c.r;
 	}
 }
