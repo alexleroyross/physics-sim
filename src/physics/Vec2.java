@@ -15,13 +15,19 @@ public class Vec2 {
 		this.x = x;
 		this.y = y;
 	}
+
+	public Vec2(double x, double y)
+	{
+		this.x = (int)x;
+		this.y = (int)y;
+	}
 	
 	public Vec2(Vec2 v)
 	{
 		this.x = v.x;
 		this.y = v.y;
 	}
-	
+
 	public void set(Vec2 v)
 	{
 		this.x = v.x;

@@ -18,4 +18,57 @@ public class Physics {
 		r *= r;
 		return (r < dx + dy);
 	}
+	
+	public void resolveCollision(RigidBody a, RigidBody b)
+	{
+		// relative velocity
+		Vec2 rv = vSub(b.velocity, a.velocity);
+		
+		// is this how you do it??
+		Vec2 normal = normalize(rv);
+		
+		// velocity along the normal
+		float velAlongNorm = dotProduct(rv, normal);
+		
+		// no resolution if velocities are separating
+		if(velAlongNorm > 0)
+			return;
+		
+		// restitution
+		float e = Math.min(a.restitution, b.restitution);
+		
+		// impulse scalar
+		float j = -(1 + e) * velAlongNorm;
+		j /= a.invMass + b.invMass;
+		
+		// apply impulse
+		Vec2 impulse = new Vec2(j * normal.x, j * normal.y);
+		a.velocity.x -= a.invMass * impulse.x;
+		a.velocity.y -= a.invMass * impulse.y;
+		b.velocity.x += b.invMass * impulse.x;
+		b.velocity.y += b.invMass * impulse.y;
+	}
+	
+	public Vec2 normalize(Vec2 v)
+	{
+		double mag = Math.sqrt(v.x * v.x + v.y * v.y);
+		return new Vec2(v.x / mag, v.y  / mag);
+	}
+	
+	public float dotProduct(Vec2 a, Vec2 b)
+	{
+		return a.x * b.x + a.y * b.y;
+	}
+	
+	// add vectors
+	public Vec2 vAdd(Vec2 a, Vec2 b)
+	{
+		return new Vec2(a.x + b.x, a.y + b.y);
+	}
+	
+	// subtract vectors
+	public Vec2 vSub(Vec2 a, Vec2 b)
+	{
+		return new Vec2(a.x - b.x, a.y - b.y);
+	}
 }
