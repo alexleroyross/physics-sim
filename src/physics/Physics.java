@@ -18,6 +18,11 @@ public class Physics {
 		r *= r;
 		return (r < dx + dy);
 	}
+
+	public boolean CirclevsCircle(Manifold m)
+	{
+		
+	}
 	
 	public void resolveCollision(RigidBody a, RigidBody b)
 	{
@@ -54,6 +59,22 @@ public class Physics {
 		double mag = Math.sqrt(v.x * v.x + v.y * v.y);
 		return new Vec2(v.x / mag, v.y  / mag);
 	}
+
+	// this is horrible and you just need to rewrite all of it
+	/*
+	public void correctPosition(RigidBody a, RigidBody b)
+	{
+		double percent = 0.2;
+		double slop = 0.01;
+		double penetration = 0;
+		Vec2 n = new Vec2(0, 0);
+		double correction = Math.max(penetration - slop, 0.0f) / (a.invMass + b.invMass) * percent * n;
+		a.position.x -= a.invMass * correction;
+		a.position.y -= a.invMass * correction;
+		b.position.x += b.invMass * correction;
+		b.position.y += b.invMass * correction;
+	}
+	*/
 	
 	public float dotProduct(Vec2 a, Vec2 b)
 	{
